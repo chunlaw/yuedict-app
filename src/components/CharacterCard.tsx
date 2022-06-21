@@ -1,5 +1,6 @@
 import React, {
   useContext,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -29,7 +30,6 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
     const { db, phoneticSys } = useContext(AppContext);
     const { t } = useTranslation();
     const [pIdx, setPIdx] = useState(0);
-    const audioRef = useRef<any>(null);
 
     useImperativeHandle(
       ref,
@@ -44,8 +44,12 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
           });
         },
       }),
-      []
+      [pIdx]
     );
+
+    useEffect(() => {
+      setPIdx(0);
+    }, [char]);
 
     return (
       <Box sx={rootSx}>
