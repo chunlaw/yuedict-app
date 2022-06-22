@@ -2,15 +2,14 @@ import React, {
   useContext,
   useEffect,
   useImperativeHandle,
-  useRef,
   useState,
+  useMemo,
 } from "react";
 import { Box, SxProps, Theme, Typography } from "@mui/material";
 import AppContext, { Pronunciation } from "../AppContext";
 import { grey } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 import Phonetics from "./Phonetics";
-import ReactAudioPlayer from "react-audio-player";
 
 interface CharacterCardProps {
   char: string;
@@ -31,6 +30,12 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
     const { t } = useTranslation();
     const [pIdx, setPIdx] = useState(0);
 
+    const guessIdx: number = useMemo( () => ( 
+      db[char]?.phonetics.lshk.reduce((acc, {meanings}, idx, self) => (
+        meanings.length > self[acc].meanings.length ? idx : acc
+      ), 0)
+    ), [db, char] );
+
     useImperativeHandle(
       ref,
       () => ({
@@ -40,15 +45,18 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
             audio.autoplay = true;
             audio.onended = resolve;
             audio.onerror = resolve;
-            audio.src = getUrl(db[char]?.phonetics[phoneticSys][pIdx]);
+            audio.onplay = () => {
+              if (!isNaN(audio.currentTime)) audio.playbackRate = 1.5;
+            };
+            audio.src = getUrl(db[char]?.phonetics.lshk[pIdx]);
           });
         },
       }),
-      [pIdx]
+      [pIdx, db, char]
     );
 
     useEffect(() => {
-      setPIdx(0);
+      setPIdx(guessIdx);
     }, [char]);
 
     return (

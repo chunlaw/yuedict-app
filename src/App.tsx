@@ -1,7 +1,6 @@
-import React, { useMemo, useContext } from "react";
+import React, { useMemo } from "react";
 import "./App.css";
-import { Button, Container, Paper } from "@mui/material";
-import AppContext from "./AppContext";
+import { Container } from "@mui/material";
 import {
   ThemeProvider,
   StyledEngineProvider,
@@ -26,8 +25,6 @@ const Router = () => {
 };
 
 function App() {
-  const { db } = useContext(AppContext);
-
   const theme = useMemo(
     () =>
       createTheme({

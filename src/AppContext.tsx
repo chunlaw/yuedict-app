@@ -5,7 +5,7 @@ export interface Pronunciation {
   initial?: string;
   final?: string;
   tone?: string;
-  meanings?: string;
+  meanings: string;
 }
 
 export interface Definition {
@@ -77,7 +77,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           setDb(parseDb(_db));
         });
     }
-  }, [state.db, setDb]);
+  }, [state.db]);
 
   const setSys = (sys: "lshk" | "yale") => {
     setState((prev) => ({

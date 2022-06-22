@@ -3,15 +3,12 @@ import {
   BottomNavigation,
   BottomNavigationAction as MuiBottomNavigationAction,
   BottomNavigationActionProps,
-  SxProps,
 } from "@mui/material";
-import { Theme } from "@mui/system";
 import {
   Search as SearchIcon,
   SignLanguage as SignLanguageIcon,
   Settings as SettingsIcon,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Footer = () => {
@@ -41,10 +38,3 @@ const BottomNavigationAction = React.forwardRef<
 });
 
 export default Footer;
-
-const rootSx: SxProps<Theme> = {
-  display: "flex",
-  justifyContent: "space-between",
-  py: 2,
-  alignItems: "center",
-};

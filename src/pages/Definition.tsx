@@ -1,8 +1,7 @@
-import { Box, IconButton, SxProps, TextField, Typography } from "@mui/material";
+import React, { useRef } from "react";
+import { Box, IconButton, SxProps, TextField } from "@mui/material";
 import { Theme } from "@mui/system";
-import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AppContext from "../AppContext";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import CharacterCard from "../components/CharacterCard";
 
