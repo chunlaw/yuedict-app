@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useImperativeHandle,
   useState,
-  useMemo,
 } from "react";
 import { Box, SxProps, Theme, Typography } from "@mui/material";
 import AppContext, { Pronunciation } from "../AppContext";
@@ -30,12 +29,6 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
     const { t } = useTranslation();
     const [pIdx, setPIdx] = useState(0);
 
-    const guessIdx: number = useMemo( () => ( 
-      db[char]?.phonetics.lshk.reduce((acc, {meanings}, idx, self) => (
-        meanings.length > self[acc].meanings.length ? idx : acc
-      ), 0)
-    ), [db, char] );
-
     useImperativeHandle(
       ref,
       () => ({
@@ -56,8 +49,12 @@ const CharacterCard = React.forwardRef<any, CharacterCardProps>(
     );
 
     useEffect(() => {
-      setPIdx(guessIdx);
-    }, [char]);
+      setPIdx(
+        db[char]?.phonetics.lshk.reduce((acc, {meanings}, idx, self) => (
+          meanings.length > self[acc].meanings.length ? idx : acc
+        ), 0)
+      );
+    }, [db, char]);
 
     return (
       <Box sx={rootSx}>
