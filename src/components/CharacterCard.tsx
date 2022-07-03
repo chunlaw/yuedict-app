@@ -105,10 +105,12 @@ const definitinoContainerSx: SxProps<Theme> = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
+  minWidth: 0,
 };
 
 const phoneticsContainer: SxProps<Theme> = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  minWidth: 0,
 };

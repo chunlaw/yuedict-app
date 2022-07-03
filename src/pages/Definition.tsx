@@ -48,4 +48,5 @@ const rootSx: SxProps<Theme> = {
   flex: 1,
   flexDirection: "column",
   overflow: "scroll",
+  width: "100%",
 };

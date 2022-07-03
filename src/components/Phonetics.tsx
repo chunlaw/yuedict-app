@@ -52,7 +52,7 @@ const Phonetics = ({
         </Box>
       </Button>
       <Typography
-        sx={{ whiteSpace: "nowrap" }}
+        sx={{ whiteSpace: "nowrap", textOverflow: 'ellipsis' }}
         variant="h6"
         color="textPrimary"
       >
@@ -66,6 +66,8 @@ export default Phonetics;
 
 const rootSx: SxProps<Theme> = {
   display: "flex",
-  overflow: "scroll",
+  overflow: "hidden",
   alignItems: "center",
+  minWidth: 0,
+  width: '95%',
 };
